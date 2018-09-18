@@ -53,6 +53,11 @@ func (v Vector3f) DistanceTo(o Vector3f) float32 {
 	return float32(math.Sqrt(float64(v.SquaredDistance(o))))
 }
 
+// IsEqual checks if both vectors are considered equal
+func (v Vector3f) IsEqual(o Vector3f) bool {
+	return almostEqual(v.X, o.X) && almostEqual(v.Y, o.Y) && almostEqual(v.Z, o.Z)
+}
+
 // SquaredDistance calculates the squared Euclidean distance between two points
 func (v Vector3f) SquaredDistance(o Vector3f) float32 {
 	xd := o.X - v.X
