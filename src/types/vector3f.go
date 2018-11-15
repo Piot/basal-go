@@ -34,32 +34,54 @@ import (
 
 // Vector3f : Vector type
 type Vector3f struct {
-	X float32
-	Y float32
-	Z float32
+	X int32
+	Y int32
+	Z int32
+}
+
+const factor = 1000
+
+func FixedToFloat(v int32) float32 {
+	return float32(v) / factor
+}
+
+func FloatToFixed(f float32) int32 {
+	return int32(f * factor)
+}
+
+func (v Vector3f) ToFloats() (float32, float32, float32) {
+	return FixedToFloat(v.X), FixedToFloat(v.Y), FixedToFloat(v.Z)
 }
 
 // NewVector3f : Creates a new vector
-func NewVector3f(x float32, y float32, z float32) Vector3f {
+func NewVector3f(x int32, y int32, z int32) Vector3f {
 	return Vector3f{X: x, Y: y, Z: z}
 }
 
+func MakeVector3fFromFloats(x float32, y float32, z float32) Vector3f {
+	return NewVector3f(FloatToFixed(x), FloatToFixed(y), FloatToFixed(z))
+}
+
 func (v Vector3f) String() string {
-	return fmt.Sprintf("[vector3f %0.2f, %0.2f, %0.2f]", v.X, v.Y, v.Z)
+	return fmt.Sprintf("[vector3f %0.2f, %0.2f, %0.2f]", FixedToFloat(v.X), FixedToFloat(v.Y), FixedToFloat(v.Z))
+}
+
+func (v Vector3f) Delta(o Vector3f) Vector3f {
+	return NewVector3f(v.X-o.X, v.Y-o.Y, v.Z-o.Z)
 }
 
 // DistanceTo calculates the Euclidean distance between two points
-func (v Vector3f) DistanceTo(o Vector3f) float32 {
-	return float32(math.Sqrt(float64(v.SquaredDistance(o))))
+func (v Vector3f) DistanceTo(o Vector3f) int32 {
+	return int32(math.Sqrt(float64(v.SquaredDistance(o))))
 }
 
 // IsEqual checks if both vectors are considered equal
 func (v Vector3f) IsEqual(o Vector3f) bool {
-	return almostEqual(v.X, o.X) && almostEqual(v.Y, o.Y) && almostEqual(v.Z, o.Z)
+	return v.X == o.X && v.Y == o.Y && v.Z == o.Z
 }
 
 // SquaredDistance calculates the squared Euclidean distance between two points
-func (v Vector3f) SquaredDistance(o Vector3f) float32 {
+func (v Vector3f) SquaredDistance(o Vector3f) int32 {
 	xd := o.X - v.X
 	yd := o.Y - v.Y
 	zd := o.Z - v.Z
