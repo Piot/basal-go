@@ -39,14 +39,14 @@ type Vector3f struct {
 	Z int32
 }
 
-const factor = 1000
+const FixedPointFactor = 1000
 
 func FixedToFloat(v int32) float32 {
-	return float32(v) / factor
+	return float32(v) / FixedPointFactor
 }
 
 func FloatToFixed(f float32) int32 {
-	return int32(f * factor)
+	return int32(f * FixedPointFactor)
 }
 
 func (v Vector3f) ToFloats() (float32, float32, float32) {
