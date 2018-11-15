@@ -81,10 +81,10 @@ func (v Vector3f) IsEqual(o Vector3f) bool {
 }
 
 // SquaredDistance calculates the squared Euclidean distance between two points
-func (v Vector3f) SquaredDistance(o Vector3f) int32 {
-	xd := o.X - v.X
-	yd := o.Y - v.Y
-	zd := o.Z - v.Z
+func (v Vector3f) SquaredDistance(o Vector3f) int64 {
+	xd := int64(o.X - v.X)
+	yd := int64(o.Y - v.Y)
+	zd := int64(o.Z - v.Z)
 
 	return xd*xd + yd*yd + zd*zd
 }
