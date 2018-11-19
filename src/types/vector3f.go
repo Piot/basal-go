@@ -66,6 +66,10 @@ func (v Vector3f) String() string {
 	return fmt.Sprintf("[vector3f %0.2f, %0.2f, %0.2f]", FixedToFloat(v.X), FixedToFloat(v.Y), FixedToFloat(v.Z))
 }
 
+func (v Vector3f) DebugString() string {
+	return fmt.Sprintf("[vector3f fixed %d, %d, %d]", v.X, v.Y, v.Z)
+}
+
 func (v Vector3f) Delta(o Vector3f) Vector3f {
 	return NewVector3f(v.X-o.X, v.Y-o.Y, v.Z-o.Z)
 }
