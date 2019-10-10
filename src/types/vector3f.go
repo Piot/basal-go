@@ -63,7 +63,7 @@ func MakeVector3fFromFloats(x float32, y float32, z float32) Vector3f {
 }
 
 func (v Vector3f) String() string {
-	return fmt.Sprintf("[vector3f %0.2f, %0.2f, %0.2f]", FixedToFloat(v.X), FixedToFloat(v.Y), FixedToFloat(v.Z))
+	return fmt.Sprintf("[vector3f %9.2f, %9.2f, %9.2f]", FixedToFloat(v.X), FixedToFloat(v.Y), FixedToFloat(v.Z))
 }
 
 func (v Vector3f) DebugString() string {
